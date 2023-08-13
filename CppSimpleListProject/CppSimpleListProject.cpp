@@ -112,13 +112,13 @@ void PrintList(Node<T>* head)
 int main()
 {
     Node<float>* head{ nullptr };
-    PushBack(head, 100);
-    PushBack(head, 200);
-    PushBack(head, 300);
+    PushBack(head, 100.0f);
+    PushBack(head, 200.f);
+    PushBack<float>(head, 300);
 
-    PushFront(head, 400);
+    PushFront<float>(head, 400);
 
-    Insert(head, 500, 2);
+    Insert<float>(head, 500, 2);
     PrintList(head);
 
     std::cout << "back: " << PopBack(head) << "\n\n";
