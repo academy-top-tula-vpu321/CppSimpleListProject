@@ -1,30 +1,33 @@
 ﻿#include <iostream>
 
+template <typename T>
 struct Node
 {
-    int value;
-    Node* next;
+    T value;
+    Node<T>* next;
 };
 
-void PushBack(Node*& head, int value)
+template <typename T>
+void PushBack(Node<T>*& head, T value)
 {
-    Node* nodeNew{ new Node };
+    Node<T>* nodeNew{ new Node<T> };
     nodeNew->value = value;
     nodeNew->next = head;
     head = nodeNew;
 }
 
-void PushFront(Node*& head, int value)
+template <typename T>
+void PushFront(Node<T>*& head, T value)
 {
     if (!head)
         PushBack(head, value);
     else
     {
-        Node* nodeLast{ head };
+        Node<T>* nodeLast{ head };
         while (nodeLast->next)
             nodeLast = nodeLast->next;
 
-        Node* nodeNew{ new Node };
+        Node<T>* nodeNew{ new Node<T> };
         nodeNew->value = value;
         nodeNew->next = nullptr;
         nodeLast->next = nodeNew;
@@ -32,7 +35,8 @@ void PushFront(Node*& head, int value)
     
 }
 
-void Insert(Node*& head, int value, int index)
+template <typename T>
+void Insert(Node<T>*& head, T value, int index)
 {
     if (index <= 0)
     {
@@ -41,7 +45,7 @@ void Insert(Node*& head, int value, int index)
     }
 
     int size{};
-    Node* nodeCurr{ head };
+    Node<T>* nodeCurr{ head };
     while (nodeCurr)
     {
         size++;
@@ -56,28 +60,30 @@ void Insert(Node*& head, int value, int index)
     nodeCurr = head;
     for (int i = 0; i < index - 1; i++)
         nodeCurr = nodeCurr->next;
-    Node* nodeNew{ new Node };
+    Node<T>* nodeNew{ new Node<T> };
     nodeNew->value = value;
     nodeNew->next = nodeCurr->next;
     nodeCurr->next = nodeNew;
 }
 
-int PopBack(Node*& head)
+template <typename T>
+int PopBack(Node<T>*& head)
 {
     int value = head->value;
-    Node* nodeDel{ head };
+    Node<T>* nodeDel{ head };
     head = head->next;
     delete nodeDel;
 
     return value;
 }
 
-int PopFront(Node*& head)
+template <typename T>
+int PopFront(Node<T>*& head)
 {
     if (!head->next)
         return PopBack(head);
 
-    Node* nodeCurr{ head };
+    Node<T>* nodeCurr{ head };
     while (nodeCurr->next->next)
         nodeCurr = nodeCurr->next;
     int value = nodeCurr->next->value;
@@ -87,12 +93,14 @@ int PopFront(Node*& head)
     return value;
 }
 
-int Remove(Node*& head, int index)
+template <typename T>
+int Remove(Node<T>*& head, int index)
 {
-
+    return 0;
 }
 
-void PrintList(Node* head)
+template <typename T>
+void PrintList(Node<T>* head)
 {
     while (head)
     {
@@ -101,11 +109,9 @@ void PrintList(Node* head)
     }
 }
 
-
-
 int main()
 {
-    Node* head{ nullptr };
+    Node<float>* head{ nullptr };
     PushBack(head, 100);
     PushBack(head, 200);
     PushBack(head, 300);
